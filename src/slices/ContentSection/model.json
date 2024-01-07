@@ -1,0 +1,104 @@
+{
+  "id": "content_section",
+  "type": "SharedSlice",
+  "name": "ContentSection",
+  "description": "ContentSection",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "section_header": {
+          "type": "Text",
+          "config": {
+            "label": "Überschrift",
+            "placeholder": "Worum geht's?"
+          }
+        },
+        "section_subheader": {
+          "type": "Text",
+          "config": {
+            "label": "Unterüberschrift",
+            "placeholder": "Kleine Nebeninformation"
+          }
+        },
+        "section_text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Text",
+            "placeholder": "Kurze Beschreibung",
+            "allowTargetBlank": true,
+            "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "background": {
+          "type": "Boolean",
+          "config": {
+            "label": "Hintergrund An/Aus",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        },
+        "anchor": {
+          "type": "Text",
+          "config": {
+            "label": "Ankername",
+            "placeholder": ""
+          }
+        },
+        "image_lr": {
+          "type": "Select",
+          "config": {
+            "label": "Bild links/rechts",
+            "placeholder": "",
+            "options": [
+              "rechts",
+              "links"
+            ],
+            "default_value": "rechts"
+          }
+        },
+        "bgColor": {
+          "type": "Select",
+          "config": {
+            "label": "Hintergrundfarbe",
+            "placeholder": "",
+            "options": [
+              "Keine",
+              "Rosa",
+              "Orange",
+              "Lila",
+              "Hell",
+              "Dunkel"
+            ],
+            "default_value": "Keine"
+          }
+        },
+        "fullWidth": {
+          "type": "Boolean",
+          "config": {
+            "label": "Hintegrund volle Breite?",
+            "default_value": false,
+            "placeholder_true": "true",
+            "placeholder_false": "false"
+          }
+        }
+      },
+      "items": {
+        "section_image": {
+          "type": "Image",
+          "config": {
+            "label": "Bild",
+            "constraint": {},
+            "thumbnails": []
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "id": "link",
+  "type": "SharedSlice",
+  "name": "Navigationslinks",
+  "description": "Link",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {},
+      "items": {
+        "linkName": {
+          "type": "Text",
+          "config": {
+            "label": "Link-Name",
+            "placeholder": ""
+          }
+        },
+        "anchor": {
+          "type": "Text",
+          "config": {
+            "label": "Anker (selber Name wie Section)",
+            "placeholder": ""
+          }
+        },
+        "buttonStyle": {
+          "type": "Select",
+          "config": {
+            "label": "Button-Style",
+            "placeholder": "",
+            "options": [
+              "Call to Action",
+              "Sekundär"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

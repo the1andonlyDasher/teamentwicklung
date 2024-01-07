@@ -1,0 +1,28 @@
+{
+  "id": "footer_link",
+  "type": "SharedSlice",
+  "name": "FooterLink",
+  "description": "FooterLink",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "link": {
+          "type": "Link",
+          "config": {
+            "label": "Link",
+            "placeholder": "",
+            "allowTargetBlank": false,
+            "select": null
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

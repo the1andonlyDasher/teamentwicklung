@@ -1,0 +1,68 @@
+{
+  "id": "hero_section",
+  "type": "SharedSlice",
+  "name": "HeroSection",
+  "description": "HeroSection",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "hero_header": {
+          "type": "Text",
+          "config": {
+            "label": "Überschrift",
+            "placeholder": "Superduper Überschrift"
+          }
+        },
+        "hero_subheader": {
+          "type": "Text",
+          "config": {
+            "label": "Unterüberschrift",
+            "placeholder": "Kleinere Überschrift / Unterüberschrift"
+          }
+        },
+        "hero_text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Text",
+            "placeholder": "Ein wenig Text",
+            "allowTargetBlank": true,
+            "single": "preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl,paragraph"
+          }
+        }
+      },
+      "items": {
+        "hero_ButtonText": {
+          "type": "Text",
+          "config": {
+            "label": "Button-Text",
+            "placeholder": ""
+          }
+        },
+        "hero_anchor": {
+          "type": "Text",
+          "config": {
+            "label": "Anker",
+            "placeholder": ""
+          }
+        },
+        "hero_buttonStyle": {
+          "type": "Select",
+          "config": {
+            "label": "Button-Style",
+            "placeholder": "",
+            "options": [
+              "Call to Action",
+              "Sekundär"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

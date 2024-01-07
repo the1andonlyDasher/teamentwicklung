@@ -1,0 +1,60 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"hero_header": {
+				"__TYPE__": "FieldContent",
+				"value": "nearly",
+				"type": "Text"
+			},
+			"hero_subheader": {
+				"__TYPE__": "FieldContent",
+				"value": "unit",
+				"type": "Text"
+			},
+			"hero_text": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Amet pariatur dolor elit elit officia reprehenderit. Proident Lorem cillum adipisicing id. Lorem ex cupidatat in Lorem esse et elit."
+						}
+					}
+				]
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"hero_ButtonText",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "easy",
+							"type": "Text"
+						}
+					],
+					[
+						"hero_anchor",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "die",
+							"type": "Text"
+						}
+					],
+					[
+						"hero_buttonStyle",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "Sekundär",
+							"type": "Select"
+						}
+					]
+				]
+			}
+		]
+	}
+]

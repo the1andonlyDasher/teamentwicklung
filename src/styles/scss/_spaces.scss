@@ -1,0 +1,38 @@
+$spaces: (
+  small: (
+    xs: clamp(0.125em, 5vw, 0.25em),
+    s: clamp(0.25em, calc(5vw + 0.25em), 0.5em),
+    m: clamp(0.5em, calc(5vw + 0.35em), 0.75em),
+    l: clamp(0.75em, calc(5vw + 0.5em), 1em),
+  ),
+  medium: (
+    xs: clamp(0.125em, 5vw, 0.25em),
+    s: clamp(0.25em, calc(5vw + 0.25em), 0.5em),
+    m: clamp(0.5em, calc(5vw + 0.35em), 0.75em),
+    l: clamp(0.75em, calc(5vw + 0.5em), 1em),
+  ),
+  large: (
+    xs: clamp(0.125em, 5vw, 0.25em),
+    s: clamp(0.25em, calc(5vw + 0.25em), 0.5em),
+    m: clamp(0.5em, calc(5vw + 0.35em), 0.75em),
+    l: clamp(0.75em, calc(5vw + 0.5em), 1em),
+  ),
+);
+
+$swiper: (
+  xs: (
+    height: 200px,
+  ),
+  small: (
+    height: 300px,
+  ),
+  medium: (
+    height: 450px,
+  ),
+  large: (
+    height: 500px,
+  ),
+  xl: (
+    height: 550px,
+  ),
+);

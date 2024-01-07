@@ -1,0 +1,28 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"contact_title": {
+				"__TYPE__": "FieldContent",
+				"value": "cow",
+				"type": "Text"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"contact_text",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "follow",
+							"type": "Text"
+						}
+					]
+				]
+			}
+		]
+	}
+]

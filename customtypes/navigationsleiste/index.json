@@ -1,0 +1,33 @@
+{
+  "id": "navigationsleiste",
+  "label": "Navigationsleiste",
+  "format": "custom",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "logo": {
+        "type": "Image",
+        "config": {
+          "label": "Logo",
+          "constraint": {
+            "width": 100,
+            "height": 100
+          },
+          "thumbnails": []
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "link": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    }
+  }
+}

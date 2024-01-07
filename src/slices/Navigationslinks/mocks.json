@@ -1,0 +1,38 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"linkName",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "are",
+							"type": "Text"
+						}
+					],
+					[
+						"anchor",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "captain",
+							"type": "Text"
+						}
+					],
+					[
+						"buttonStyle",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "Sekundär",
+							"type": "Select"
+						}
+					]
+				]
+			}
+		]
+	}
+]
