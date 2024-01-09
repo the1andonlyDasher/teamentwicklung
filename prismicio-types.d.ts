@@ -4,6 +4,67 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
+type AgbDocumentDataSlicesSlice = FullpageTextSlice;
+
+/**
+ * Content for AGB documents
+ */
+interface AgbDocumentData {
+  /**
+   * Slice Zone field in *AGB*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: agb.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<AgbDocumentDataSlicesSlice> /**
+   * Meta Description field in *AGB*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: agb.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *AGB*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: agb.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+
+  /**
+   * Meta Title field in *AGB*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: agb.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_title: prismic.KeyTextField;
+}
+
+/**
+ * AGB document from Prismic
+ *
+ * - **API ID**: `agb`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type AgbDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<Simplify<AgbDocumentData>, "agb", Lang>;
+
 type DatenschutzDocumentDataSlicesSlice = FullpageTextSlice;
 
 /**
@@ -69,12 +130,23 @@ export type DatenschutzDocument<Lang extends string = string> =
     Lang
   >;
 
-type FooterDocumentDataSlicesSlice = FooterLinkSlice;
+type FooterDocumentDataSlicesSlice = RichTextSlice | FooterLinkSlice;
 
 /**
  * Content for Footer documents
  */
 interface FooterDocumentData {
+  /**
+   * Footertext field in *Footer*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer.text
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text: prismic.RichTextField;
+
   /**
    * Slice Zone field in *Footer*
    *
@@ -162,7 +234,7 @@ interface HomePageDocumentData {
  * @typeParam Lang - Language API ID of the document.
  */
 export type HomePageDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
+  prismic.PrismicDocumentWithUID<
     Simplify<HomePageDocumentData>,
     "home_page",
     Lang
@@ -227,7 +299,7 @@ interface ImpressumDocumentData {
  * @typeParam Lang - Language API ID of the document.
  */
 export type ImpressumDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
+  prismic.PrismicDocumentWithUID<
     Simplify<ImpressumDocumentData>,
     "impressum",
     Lang
@@ -286,11 +358,11 @@ type PageDocumentDataSlicesSlice =
   | ContentSectionSlice;
 
 /**
- * Content for page documents
+ * Content for Standardseite (Impressum, AGB, ...) documents
  */
 interface PageDocumentData {
   /**
-   * Slice Zone field in *page*
+   * Slice Zone field in *Standardseite (Impressum, AGB, ...)*
    *
    * - **Field Type**: Slice Zone
    * - **Placeholder**: *None*
@@ -299,7 +371,7 @@ interface PageDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
   slices: prismic.SliceZone<PageDocumentDataSlicesSlice> /**
-   * Meta Description field in *page*
+   * Meta Description field in *Standardseite (Impressum, AGB, ...)*
    *
    * - **Field Type**: Text
    * - **Placeholder**: A brief summary of the page
@@ -310,7 +382,7 @@ interface PageDocumentData {
   meta_description: prismic.KeyTextField;
 
   /**
-   * Meta Image field in *page*
+   * Meta Image field in *Standardseite (Impressum, AGB, ...)*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -321,7 +393,7 @@ interface PageDocumentData {
   meta_image: prismic.ImageField<never>;
 
   /**
-   * Meta Title field in *page*
+   * Meta Title field in *Standardseite (Impressum, AGB, ...)*
    *
    * - **Field Type**: Text
    * - **Placeholder**: A title of the page used for social media and search engines
@@ -333,7 +405,7 @@ interface PageDocumentData {
 }
 
 /**
- * page document from Prismic
+ * Standardseite (Impressum, AGB, ...) document from Prismic
  *
  * - **API ID**: `page`
  * - **Repeatable**: `true`
@@ -345,6 +417,7 @@ export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
 export type AllDocumentTypes =
+  | AgbDocument
   | DatenschutzDocument
   | FooterDocument
   | HomePageDocument
@@ -401,7 +474,7 @@ export interface ContentSectionSliceDefaultPrimary {
    * Ankername field in *ContentSection → Primary*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: *None*
+   * - **Placeholder**: Wie soll der Link zu dieser Sektion heißen?
    * - **API ID Path**: content_section.primary.anchor
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
@@ -627,6 +700,16 @@ export interface HeroSectionSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   hero_text: prismic.RichTextField;
+
+  /**
+   * Anker field in *HeroSection → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_section.primary.anchor
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  anchor: prismic.KeyTextField;
 }
 
 /**
@@ -642,16 +725,6 @@ export interface HeroSectionSliceDefaultItem {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   hero_ButtonText: prismic.KeyTextField;
-
-  /**
-   * Anker field in *HeroSection → Items*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero_section.items[].hero_anchor
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  hero_anchor: prismic.KeyTextField;
 
   /**
    * Button-Style field in *HeroSection → Items*
@@ -695,11 +768,11 @@ export type HeroSectionSlice = prismic.SharedSlice<
 >;
 
 /**
- * Primary content in *Kontakformular → Primary*
+ * Primary content in *Kontaktformular → Primary*
  */
 export interface KontakformularSliceDefaultPrimary {
   /**
-   * Titel field in *Kontakformular → Primary*
+   * Titel field in *Kontaktformular → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -707,14 +780,24 @@ export interface KontakformularSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   contact_title: prismic.KeyTextField;
+
+  /**
+   * Ankername field in *Kontaktformular → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Wie soll der Link zu dieser Sektion heißen?
+   * - **API ID Path**: kontakformular.primary.anchor
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  anchor: prismic.KeyTextField;
 }
 
 /**
- * Primary content in *Kontakformular → Items*
+ * Primary content in *Kontaktformular → Items*
  */
 export interface KontakformularSliceDefaultItem {
   /**
-   * Lustiger Text field in *Kontakformular → Items*
+   * Lustiger Text field in *Kontaktformular → Items*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -725,7 +808,7 @@ export interface KontakformularSliceDefaultItem {
 }
 
 /**
- * Default variation for Kontakformular Slice
+ * Default variation for Kontaktformular Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
@@ -738,12 +821,12 @@ export type KontakformularSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
- * Slice variation for *Kontakformular*
+ * Slice variation for *Kontaktformular*
  */
 type KontakformularSliceVariation = KontakformularSliceDefault;
 
 /**
- * Kontakformular Shared Slice
+ * Kontaktformular Shared Slice
  *
  * - **API ID**: `kontakformular`
  * - **Description**: Kontakformular
@@ -816,6 +899,51 @@ type LinkSliceVariation = LinkSliceDefault;
  */
 export type LinkSlice = prismic.SharedSlice<"link", LinkSliceVariation>;
 
+/**
+ * Primary content in *RichText → Items*
+ */
+export interface RichTextSliceDefaultItem {
+  /**
+   * text field in *RichText → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: rich_text.items[].text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text: prismic.RichTextField;
+}
+
+/**
+ * Default variation for RichText Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type RichTextSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  Simplify<RichTextSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *RichText*
+ */
+type RichTextSliceVariation = RichTextSliceDefault;
+
+/**
+ * RichText Shared Slice
+ *
+ * - **API ID**: `rich_text`
+ * - **Description**: RichText
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type RichTextSlice = prismic.SharedSlice<
+  "rich_text",
+  RichTextSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -826,6 +954,9 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      AgbDocument,
+      AgbDocumentData,
+      AgbDocumentDataSlicesSlice,
       DatenschutzDocument,
       DatenschutzDocumentData,
       DatenschutzDocumentDataSlicesSlice,
@@ -873,6 +1004,10 @@ declare module "@prismicio/client" {
       LinkSliceDefaultItem,
       LinkSliceVariation,
       LinkSliceDefault,
+      RichTextSlice,
+      RichTextSliceDefaultItem,
+      RichTextSliceVariation,
+      RichTextSliceDefault,
     };
   }
 }

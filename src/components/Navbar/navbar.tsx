@@ -8,9 +8,10 @@ import { NavItem as Mnav } from "@/components/Navbar/NavItemMobile";
 import NavbarToggle from "./NavbarToggle";
 import { PrismicImage } from "@prismicio/react";
 
-const Navbar = ({ logo, alt, navbar, legals }: any) => {
+const Navbar = ({ navbar, links }: any) => {
   const navbarMain = useRef<any>(!null);
   const [isShrunk, setShrunk] = useState(false);
+
   useEffect(() => {
     const handler = () => {
       setShrunk((isShrunk) => {
@@ -81,27 +82,31 @@ const Navbar = ({ logo, alt, navbar, legals }: any) => {
           />
         </motion.a>
         <Navigation>
-          {navbar.data.slices.map((i: any, index: number) =>
-            i.items.map((item: any, index: number) => (
-              <NavItem
-                clickLink={null}
-                key={item.linkName + index}
-                name={item.linkName}
-                href={"#" + item.anchor.toString().toLowerCase()}
-              />
-            ))
+          <NavItem name="Home" href="/" clickLink={null} />
+
+          {links && links.map((i: any, index: number) =>
+          (
+            <NavItem
+              clickLink={null}
+              key={i.primary.anchor + index}
+              name={i.primary.anchor}
+              href={"#" + i.primary.anchor.toString().toLowerCase()}
+            />
+          )
           )}
         </Navigation>
         <MobileNav>
-          {navbar.data.slices.map((i: any, index: number) =>
-            i.items.map((item: any, index: number) => (
-              <NavItem
-                clickLink={null}
-                key={item.linkName + index}
-                name={item.linkName}
-                href={"#" + item.anchor.toString().toLowerCase()}
-              />
-            ))
+          <NavItem name="Home" href="/" clickLink={null} />
+
+          {links && links.map((i: any, index: number) =>
+          (
+            <NavItem
+              clickLink={null}
+              key={i.primary.anchor + index}
+              name={i.primary.anchor}
+              href={"#" + i.primary.anchor.toString().toLowerCase()}
+            />
+          )
           )}
         </MobileNav>
         <NavbarToggle toggle={() => toggleOpen()} />

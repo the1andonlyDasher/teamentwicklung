@@ -34,6 +34,13 @@
             "allowTargetBlank": true,
             "single": "preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl,paragraph"
           }
+        },
+        "anchor": {
+          "type": "Text",
+          "config": {
+            "label": "Anker",
+            "placeholder": ""
+          }
         }
       },
       "items": {
@@ -41,13 +48,6 @@
           "type": "Text",
           "config": {
             "label": "Button-Text",
-            "placeholder": ""
-          }
-        },
-        "hero_anchor": {
-          "type": "Text",
-          "config": {
-            "label": "Anker",
             "placeholder": ""
           }
         },

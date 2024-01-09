@@ -22,7 +22,7 @@ function IF(props: InfoHeroProps) {
     const [location, setLocation] = useAtom(loc)
     return (
         <motion.section id={props.id} data-section-name={props.sectionName} className="flex"
-            viewport={{ margin: "100px", amount: 0.375, once: true }}
+            viewport={{ margin: "100px", amount: 0.375, once: false }}
             onViewportEnter={(entry) => {
                 entry?.isIntersecting
                     ? setLocation(

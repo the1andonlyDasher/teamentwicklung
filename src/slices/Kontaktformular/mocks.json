@@ -7,6 +7,11 @@
 				"__TYPE__": "FieldContent",
 				"value": "cow",
 				"type": "Text"
+			},
+			"anchor": {
+				"__TYPE__": "FieldContent",
+				"value": "leather",
+				"type": "Text"
 			}
 		},
 		"items": [

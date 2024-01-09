@@ -29,7 +29,7 @@ const wrapper_variants = {
     opacity: 1,
     x: 0,
     scaleX: 1,
-    transition: { type: "spring", damping: 50, stiffness: 200 },
+    transition: { type: "spring", damping: 50, stiffness: 200, delay: 0.75 },
   },
   exit: {
     opacity: 0, x: -100, scaleX: 0,
@@ -115,7 +115,6 @@ interface sProps {
  * Component for "ContentSection" Slices.
  */
 const ContentSection = ({ slice }: ContentSectionProps, props: sectionProps): JSX.Element => {
-  console.log(slice.primary.image_lr)
   const [loaded, setLoaded] = useAtom(load)
   const [app, setApp] = useAtom(loc)
   const controls = useAnimation();
@@ -138,9 +137,9 @@ const ContentSection = ({ slice }: ContentSectionProps, props: sectionProps): JS
         id={`${slice.primary.anchor}`}
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        viewport={{ margin: "0px", amount: 0.375, once: true }}
+        viewport={{ margin: "0px", amount: 0.375, once: false }}
         onViewportEnter={(entry) => {
-          controls.start("enter")
+          // controls.start("enter")
           entry?.isIntersecting
             ? setApp(
               `${entry.target?.getAttribute(
@@ -151,7 +150,7 @@ const ContentSection = ({ slice }: ContentSectionProps, props: sectionProps): JS
         }}
         data-section-name={`${slice.primary.anchor}`}
         initial="initial"
-        animate={controls}
+        whileInView={"enter"}
         exit="exit"
         ref={props.ref}
         variants={section_variants}
@@ -196,9 +195,11 @@ const ContentSection = ({ slice }: ContentSectionProps, props: sectionProps): JS
         id={`${slice.primary.anchor}`}
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        viewport={{ margin: "100px", amount: 0.375, once: true }}
+        viewport={{
+          margin: "0px", amount: 0.375, once: false
+        }}
         onViewportEnter={(entry) => {
-          controls.start("enter")
+          // controls.start("enter")
           entry?.isIntersecting
             ? setApp(
               `${entry.target?.getAttribute(
@@ -207,9 +208,10 @@ const ContentSection = ({ slice }: ContentSectionProps, props: sectionProps): JS
             )
             : null;
         }}
-        data-section-name={props.sectionName}
+        data-section-name={`${slice.primary.anchor}`}
+
         initial="initial"
-        animate={controls}
+        whileInView="enter"
         exit="exit"
         ref={props.ref}
         variants={section_variants}
@@ -248,7 +250,7 @@ const ContentSection = ({ slice }: ContentSectionProps, props: sectionProps): JS
             </motion.div>
           </motion.div>
         </motion.div>
-      </motion.section>
+      </motion.section >
     }
   </>
   );

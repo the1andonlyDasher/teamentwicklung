@@ -90,22 +90,7 @@ export default function Layout({ children, navbar, legals, t }: any) {
 
       </AnimatePresence>
 
-      <div
-        ref={scrollContainer}
-        className="scrollContainer"
-        style={{
-          overflow: scroll ? "hidden auto" : "hidden hidden",
-          zIndex: scroll ? 0 : -10,
-
-        }}
-      >
-        <section></section>
-        <section></section>
-        <section></section>
-        <section></section>
-      </div>
-
-      <WebGL eventSource={scrollContainer} />
+      <WebGL eventSource={ref} />
       <Loader />
 
     </>

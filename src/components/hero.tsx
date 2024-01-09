@@ -4,6 +4,8 @@ import { useInView } from "framer-motion";
 import Link from "next/link";
 import { Url } from "url";
 import { PrismicRichText } from "@prismicio/react";
+import { loc } from "@/ts/atoms";
+import { useAtom } from "jotai";
 
 
 const section_variants = {
@@ -83,12 +85,8 @@ interface heroProps {
 }
 
 export const Hero = (props: heroProps) => {
-  const ref = useRef<any>(!null);
-  const isInView = useInView(ref, { margin: "100px", amount: "some", once: true })
-  const controls = useAnimationControls()
-  useEffect(() => {
-    controls.start("animate")
-  }, [isInView, controls])
+
+  const [app, setApp] = useAtom(loc)
   return (
     <>
       <motion.div className="lr__wrapper">
@@ -97,7 +95,17 @@ export const Hero = (props: heroProps) => {
           variants={section_variants}
           initial="initial"
           whileInView="enter"
-          viewport={{ margin: "100px 0px 100px 0px", amount: 0.25, once: true }}
+          viewport={{ margin: "100px", amount: 0.375, once: false }}
+          onViewportEnter={(entry) => {
+            // controls.start("enter")
+            entry?.isIntersecting
+              ? setApp(
+                `${entry.target?.getAttribute(
+                  "data-section-name"
+                )}`
+              )
+              : null;
+          }}
           exit="exit"
         >
           {props.headerPartOne ? <motion.h1 className="sectionHeader" variants={header_variants}>{props.headerPartOne}

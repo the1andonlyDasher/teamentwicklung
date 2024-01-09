@@ -3,6 +3,8 @@ import { SliceComponentProps } from "@prismicio/react";
 import React, { useEffect, useRef, useState } from "react";
 import { useAnimationControls, motion, useInView } from "framer-motion";
 import emailjs from "@emailjs/browser"
+import { useAtom } from "jotai";
+import { loc } from "@/ts/atoms";
 emailjs.init("lPNDYXO-4WREGEgyS");
 
 /**
@@ -21,7 +23,7 @@ const Kontakformular = ({ slice }: KontakformularProps): JSX.Element => {
   const [firstName, setFirstName] = useState("");
   const controlsForm = useAnimationControls();
   const messageControls = useAnimationControls();
-  const inView = useInView(form, { once: true, margin: "100px 0px 100px 0px" });
+  const inView = useInView(form, { once: false, margin: "100px 0px 100px 0px" });
 
   const variants = {
     initial: { opacity: 0, x: -10 },
@@ -40,9 +42,9 @@ const Kontakformular = ({ slice }: KontakformularProps): JSX.Element => {
     initial: { opacity: 0, },
     enter: {
       opacity: 1,
-      transition: { ease: "easeIn", duration: 0.5, staggerChildren: 0.25 },
+      transition: { ease: "easeIn", duration: 0.5, staggerChildren: 0.2, when: "beforeChildren", staggerDirection: 1 },
     },
-    exit: { opacity: 0, transition: { ease: "easeOut", duration: 0.5, staggerChildren: 0.25 } },
+    exit: { opacity: 0, transition: { ease: "easeOut", duration: 0.5, staggerChildren: 0.2, when: "afterChildren", staggerDirection: -1 } },
   };
   const messageVariants = {
     initial: { opacity: 0 },
@@ -78,6 +80,7 @@ const Kontakformular = ({ slice }: KontakformularProps): JSX.Element => {
     slice.items[2].contact_text,
   ]
 
+  const [app, setApp] = useAtom(loc)
   const [rand, setRand]: any = useState(undefined)
   const [sent, setSent]: any = useState(sentMessages[rand])
   const [send, setSend]: any = useState(sendMessages[rand])
@@ -157,13 +160,39 @@ const Kontakformular = ({ slice }: KontakformularProps): JSX.Element => {
     }
   }, [inView, controlsForm]);
 
+  const section_variants = {
+    initial: {},
+    enter: {
+      transition: { staggerChildren: 0.2, when: "beforeChildren", staggerDirection: 1 },
+    },
+    exit: {
+      transition: { staggerChildren: 0.2, when: "afterChildren", staggerDirection: -1 },
+    },
+  };
+
 
   return (
-    <section
+    <motion.section
+      variants={section_variants}
+      initial="initial"
+      whileInView="enter"
+      exit="exit"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      data-section-name={`${slice.primary.anchor}`}
+      id={`${slice.primary.anchor}`}
+      viewport={{ margin: "0px", amount: 0.375, once: false }}
+      onViewportEnter={(entry) => {
+        entry?.isIntersecting
+          ? setApp(
+            `${entry.target?.getAttribute(
+              "data-section-name"
+            )}`
+          )
+          : null;
+      }}
     >
-      <div className="form-wrapper">
+      <motion.div variants={variants} className="form-wrapper">
         <h3 data-before={slice.primary.contact_title}>{slice.primary.contact_title}</h3>
         <p>{contactTexts[rand]}</p>
         <motion.div
@@ -185,6 +214,7 @@ const Kontakformular = ({ slice }: KontakformularProps): JSX.Element => {
           variants={formVariants}
           initial="initial"
           animate={controlsForm}
+          whileInView="enter"
           exit="exit"
         >
           <input type="hidden" name="contact_number"></input>
@@ -232,8 +262,8 @@ const Kontakformular = ({ slice }: KontakformularProps): JSX.Element => {
             {status}
           </motion.button>
         </motion.form>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 

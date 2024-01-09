@@ -1,7 +1,7 @@
 {
   "id": "kontakformular",
   "type": "SharedSlice",
-  "name": "Kontakformular",
+  "name": "Kontaktformular",
   "description": "Kontakformular",
   "variations": [
     {
@@ -17,6 +17,13 @@
           "config": {
             "label": "Titel",
             "placeholder": ""
+          }
+        },
+        "anchor": {
+          "type": "Text",
+          "config": {
+            "label": "Ankername",
+            "placeholder": "Wie soll der Link zu dieser Sektion heißen?"
           }
         }
       },

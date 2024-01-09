@@ -23,6 +23,11 @@
 						}
 					}
 				]
+			},
+			"anchor": {
+				"__TYPE__": "FieldContent",
+				"value": "blank",
+				"type": "Text"
 			}
 		},
 		"items": [
@@ -34,14 +39,6 @@
 						{
 							"__TYPE__": "FieldContent",
 							"value": "easy",
-							"type": "Text"
-						}
-					],
-					[
-						"hero_anchor",
-						{
-							"__TYPE__": "FieldContent",
-							"value": "die",
 							"type": "Text"
 						}
 					],

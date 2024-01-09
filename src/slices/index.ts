@@ -7,6 +7,7 @@ export const components = {
   footer_link: dynamic(() => import("./FooterLink")),
   fullpage_text: dynamic(() => import("./FullpageText")),
   hero_section: dynamic(() => import("./HeroSection")),
-  kontakformular: dynamic(() => import("./Kontakformular")),
+  kontakformular: dynamic(() => import("./Kontaktformular")),
   link: dynamic(() => import("./Navigationslinks")),
+  rich_text: dynamic(() => import("./RichText")),
 };

@@ -32,7 +32,7 @@
             "label": "Text",
             "placeholder": "Kurze Beschreibung",
             "allowTargetBlank": true,
-            "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
           }
         },
         "background": {
@@ -48,7 +48,7 @@
           "type": "Text",
           "config": {
             "label": "Ankername",
-            "placeholder": ""
+            "placeholder": "Wie soll der Link zu dieser Sektion heißen?"
           }
         },
         "image_lr": {

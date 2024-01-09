@@ -37,22 +37,7 @@
 }
 
 .footer {
-  @extend %flex-center;
-  position: relative;
-
-  // background-image: linear-gradient(
-  //   45deg,
-  //   var(--clr-primary-main),
-  //   var(--clr-secondary-main)
-  // );
-  width: 100%;
-  height: auto;
-  padding: 2rem 0 6rem 0;
-  color: var(--clr-contrast-100);
-  flex-direction: column;
-  @include mq(medium) {
-    padding: 2rem 0;
-  }
+  gap: 2rem;
 }
 
 .footer h5 {
@@ -67,8 +52,8 @@
   list-style-type: none;
   flex-direction: column;
   justify-content: space-around;
-  margin: auto;
   padding: 0;
+  gap: 2rem;
   width: 100%;
   @include mq(small) {
     flex-direction: row;

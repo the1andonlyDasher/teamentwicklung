@@ -1,5 +1,5 @@
 import { Content } from "@prismicio/client";
-import { SliceComponentProps } from "@prismicio/react";
+import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 
 /**
  * Props for `FullpageText`.
@@ -15,8 +15,8 @@ const FullpageText = ({ slice }: FullpageTextProps): JSX.Element => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      Placeholder component for fullpage_text (variation: {slice.variation})
-      Slices
+      {slice.items.map((item: any, index: number) => <PrismicRichText key={index} field={item.text} />)}
+
     </section>
   );
 };

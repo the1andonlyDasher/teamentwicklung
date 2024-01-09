@@ -228,12 +228,12 @@ a {
   @extend %trans;
   font-family: $ff-text;
   text-transform: uppercase;
-  border-radius: 3px;
+  border-radius: 10px;
   position: relative;
   text-align: center;
   font-size: var(--fs-text);
   font-weight: 600;
-  padding: var(--space-s) var(--space-l);
+  padding: var(--space-m) var(--space-l);
   z-index: 5;
   overflow: hidden;
   @include mq(medium) {
@@ -285,45 +285,42 @@ a {
 
 .btn__outline {
   background-color: #ffffff09;
-  color: var(--clr-contrast-100);
-
+  color: var(--clr-contrast-800);
   position: relative;
+  border: 2px solid var(--clr-contrast-800);
   &::before {
-    border: 3px solid var(--clr-contrast-100);
-    clip-path: polygon(
-      0% 20%,
-      0% 0%,
-      5% 0%,
-      5% 100%,
-      0% 100%,
-      0% 80%,
-      100% 80%,
-      100% 100%,
-      95% 100%,
-      95% 0%,
-      100% 0%,
-      100% 20%
-    );
+    background-color: rgb(0, 35, 50);
+    mix-blend-mode: difference;
+    z-index: -1;
+    left: -200%;
+    top: -200%;
+
+    border-radius: 9999px;
+    width: 200%;
+    height: 200%;
+  }
+  &::after {
+    background-color: rgb(255, 221, 169);
+    mix-blend-mode: difference;
+    z-index: -2;
+    right: 200%;
+    bottom: 200%;
+    border-radius: 9999px;
+    width: 200%;
+    height: 200%;
   }
   &:hover {
-    color: var(--clr-contrast-100);
+    color: var(--clr-contrast-800);
   }
   &:hover::before,
-  &:active::before {
-    clip-path: polygon(
-      0% 20%,
-      0% 0%,
-      20% 0%,
-      20% 100%,
-      0% 100%,
-      0% 20%,
-      100% 20%,
-      100% 100%,
-      20% 100%,
-      20% 0%,
-      100% 0%,
-      100% 20%
-    );
+  &:active:before {
+    left: 50%;
+    top: 50%;
+  }
+  &:hover::after,
+  &:active::after {
+    right: 50%;
+    bottom: 50%;
   }
 }
 

@@ -1,35 +1,17 @@
 {
-  "id": "page",
-  "label": "Standardseite (Impressum, AGB, ...)",
+  "id": "agb",
+  "label": "AGB",
   "format": "page",
-  "repeatable": true,
+  "repeatable": false,
   "status": true,
   "json": {
     "Main": {
-      "uid": {
-        "config": {
-          "label": "UID"
-        },
-        "type": "UID"
-      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "kontakformular": {
-              "type": "SharedSlice"
-            },
-            "link": {
-              "type": "SharedSlice"
-            },
-            "hero_section": {
-              "type": "SharedSlice"
-            },
             "fullpage_text": {
-              "type": "SharedSlice"
-            },
-            "content_section": {
               "type": "SharedSlice"
             }
           }

@@ -61,9 +61,9 @@ function Section(props: sectionProps) {
   const controls = useAnimation();
   return (
     <motion.section
-      viewport={{ margin: "100px", amount: 0.375, once: true }}
+      viewport={{ margin: "100px", amount: 0.375, once: false }}
       onViewportEnter={(entry) => {
-        controls.start("enter")
+        // controls.start("enter")
         entry?.isIntersecting
           ? setApp(
             `${entry.target?.getAttribute(
@@ -74,7 +74,7 @@ function Section(props: sectionProps) {
       }}
       data-section-name={props.sectionName}
       initial="initial"
-      animate={"enter"}
+      whileInView={"enter"}
       exit="exit"
       ref={props.ref}
       id={props.id}

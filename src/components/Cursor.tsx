@@ -10,7 +10,6 @@ export function Cursor({ param }: any) {
     const cursorY = useMotionValue(-100)
     useEffect(() => {
         const moveCursor = (e: any) => {
-            console.log("mobing")
             cursorX.set(e.clientX - 16)
             cursorY.set(e.clientY - 6)
         };
