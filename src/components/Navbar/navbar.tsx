@@ -8,8 +8,9 @@ import { NavItem as Mnav } from "@/components/Navbar/NavItemMobile";
 import NavbarToggle from "./NavbarToggle";
 import { PrismicImage } from "@prismicio/react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
-const Navbar = ({ navbar, links }: any) => {
+const Navbar = ({ navbar, links, home }: any) => {
   const navbarMain = useRef<any>(!null);
   const [isShrunk, setShrunk] = useState(false);
 
@@ -65,27 +66,25 @@ const Navbar = ({ navbar, links }: any) => {
       animate={isOpen ? "open" : "closed"}
     >
       <div className="navbar__container" aria-haspopup="menu">
-        <motion.a
+        <motion.div
           aria-label="Home"
           aria-current="page"
           className="navbar__logo active"
-          href="/"
           variants={image_variants}
           initial="hidden"
           animate="enter"
           exit="exit"
         >
-
-          <PrismicImage
-            field={navbar.data.logo}
-            width={navbar.data.logo.dimensions.width}
-            height={navbar.data.logo.dimensions.height}
-
-
-          />
-        </motion.a>
+          <Link href="/">
+            <PrismicImage
+              field={navbar.data.logo}
+              width={navbar.data.logo.dimensions.width}
+              height={navbar.data.logo.dimensions.height}
+            />
+          </Link>
+        </motion.div>
         <Navigation>
-          {router.pathname !== "/" && <NavItem name="Home" href="/" clickLink={null} />}
+          {home === true && <NavItem name="Home" href="/" clickLink={null} />}
 
           {links && links.map((i: any, index: number) =>
             i.slice_type &&
@@ -100,7 +99,7 @@ const Navbar = ({ navbar, links }: any) => {
           )}
         </Navigation>
         <MobileNav>
-          {router.pathname !== "/" && <Mnav name="Home" href="/" clickLink={null} />}
+          {home === true && <Mnav name="Home" href="/" clickLink={null} />}
 
           {links && links.map((i: any, index: number) =>
             i.slice_type &&

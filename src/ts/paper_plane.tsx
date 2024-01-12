@@ -57,7 +57,7 @@ export function Model(props: JSX.IntrinsicElements['group']) {
 
   useFrame((state, delta) => {
     easing.dampE(group.current.rotation, [state.pointer.y / 10, -state.pointer.x / 5, 0], 0.25, delta);
-    mesh.current.position.x = zPos - 3
+
   })
 
   return (

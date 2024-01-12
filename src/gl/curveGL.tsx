@@ -8,13 +8,12 @@ import {
 } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { animate, useScroll, useSpring } from "framer-motion";
-import { FunctionComponent, useEffect, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Vector3 } from "three";
 import { Model } from "@/ts/paper_plane"
 import { useAtom } from "jotai";
 import { loc, sections } from "@/ts/atoms";
 import { useRouter } from "next/router";
-import { Flex } from "@react-three/flex"
 interface ServicesGLProps {
     eventSource: any;
 }
@@ -47,7 +46,7 @@ const ServicesGL: FunctionComponent<ServicesGLProps> = (
         anchors.map((anchor: any, index: number) => {
             targets[`${anchor}`] = 1 / (anchors.length) * (index + 1) - 0.1
         })
-        // console.log(targets)
+        console.log(targets)
     }, [, router.pathname]);
 
     useEffect(() => {
@@ -104,15 +103,6 @@ const ServicesGL: FunctionComponent<ServicesGLProps> = (
             <MotionPathControls object={poi} focusDamping={0.6} damping={0.2}>
                 <Movement eventSource={props.eventSource} />
                 <mesh ref={poi}>
-                    <Flex
-                        visible={!disposed}
-                        flexDirection={"row"}
-                        justifyContent="center"
-                        alignItems="center"
-                        position={[-w, h, -3]}
-                        flexWrap="wrap"
-                        size={[w * 2, h, 0]}
-                    ></Flex>
                     <Float floatIntensity={0.01}>
                         <Model position={[2, 0, -5]} rotation={[Math.PI / 50, Math.PI / 2, Math.PI / 5]} />
                     </Float>

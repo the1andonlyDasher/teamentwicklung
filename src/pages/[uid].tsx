@@ -56,7 +56,6 @@ export default function Page({
     const arrFinal = arr.concat(pages)
     const [s, setSections]: any = useAtom(sections)
     useEffect(() => {
-        // console.log(arrFinal)
         setSections(arrFinal)
     }, [])
     return (
@@ -67,7 +66,7 @@ export default function Page({
                     <meta name="description" content={page.data.meta_description} />
                 ) : null}
             </Head>
-            <Navbar navbar={nav} />
+            <Navbar navbar={nav} home={true} />
             <SliceZone slices={page.data.slices} components={components} />
             <Footer footer={footer} />
         </>

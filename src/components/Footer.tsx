@@ -42,7 +42,6 @@ const Footer = ({ footer }: any) => {
         exit="exit"
       >
         <PrismicRichText field={footer.data.text} />
-        <PrismicLink href={"/impressum"} className="btn__alt" >Impressum</PrismicLink>
         <div className="footer-links">
           {footer.data.slices.map((slice: any) => <Link key={slice.primary.link.uid} href={`/${slice.primary.link.uid}`} className="btn__alt" >{slice.primary.link.uid}</Link>)}
         </div>

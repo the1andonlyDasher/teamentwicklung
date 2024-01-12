@@ -46,7 +46,7 @@ export default function Home({ pageContent, nav, footer, pages }: any) {
       <meta name="description" content={pageContent.data.meta_description} />
       <meta name="keywords" content={pageContent.data.meta_keywords} />
     </Head>
-    <Navbar navbar={nav} links={arr} />
+    <Navbar navbar={nav} links={arr} home={false} />
     <SliceZone slices={pageContent.data.slices} components={components} />
     <Footer footer={footer} />
   </>
