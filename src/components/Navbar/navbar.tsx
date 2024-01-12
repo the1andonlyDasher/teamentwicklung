@@ -56,6 +56,7 @@ const Navbar = ({ navbar, links, home }: any) => {
   const hrefs = ["/", "/portfolio", "/moreinfo", "/contact"];
   const legal_hrefs = ["/datapolicy", "/imprint"];
 
+  console.log(navbar.data.logo)
   return (
     <motion.nav
       // className={isShrunk ? "navbar shrunk" : "navbar"}
