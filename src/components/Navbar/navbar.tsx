@@ -75,8 +75,9 @@ const Navbar = ({ navbar, links, home }: any) => {
           animate="enter"
           exit="exit"
         >
-          <Link href="/">
+          <Link aria-label="Home Button" href="/">
             <PrismicImage
+              alt={navbar.data.logo.alt}
               field={navbar.data.logo}
               width={navbar.data.logo.dimensions.width}
               height={navbar.data.logo.dimensions.height}
