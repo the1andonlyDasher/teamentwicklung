@@ -7,6 +7,7 @@ import MobileNav from "@/components/Navbar/MobileNav";
 import { NavItem as Mnav } from "@/components/Navbar/NavItemMobile";
 import NavbarToggle from "./NavbarToggle";
 import { PrismicImage } from "@prismicio/react";
+import { useRouter } from "next/router";
 
 const Navbar = ({ navbar, links }: any) => {
   const navbarMain = useRef<any>(!null);
@@ -48,6 +49,8 @@ const Navbar = ({ navbar, links }: any) => {
     exit: { scale: 0, opacity: 0 },
   };
 
+  const router = useRouter()
+
   const [isOpen, toggleOpen] = useCycle(false, true);
   const hrefs = ["/", "/portfolio", "/moreinfo", "/contact"];
   const legal_hrefs = ["/datapolicy", "/imprint"];
@@ -82,31 +85,33 @@ const Navbar = ({ navbar, links }: any) => {
           />
         </motion.a>
         <Navigation>
-          <NavItem name="Home" href="/" clickLink={null} />
+          {router.pathname !== "/" && <NavItem name="Home" href="/" clickLink={null} />}
 
           {links && links.map((i: any, index: number) =>
-          (
-            <NavItem
-              clickLink={null}
-              key={i.primary.anchor + index}
-              name={i.primary.anchor}
-              href={"#" + i.primary.anchor.toString().toLowerCase()}
-            />
-          )
+            i.slice_type &&
+            (
+              <NavItem
+                clickLink={null}
+                key={i.primary.anchor + index}
+                name={i.primary.anchor}
+                href={"#" + i.primary.anchor.toString().toLowerCase()}
+              />
+            )
           )}
         </Navigation>
         <MobileNav>
-          <NavItem name="Home" href="/" clickLink={null} />
+          {router.pathname !== "/" && <Mnav name="Home" href="/" clickLink={null} />}
 
           {links && links.map((i: any, index: number) =>
-          (
-            <NavItem
-              clickLink={null}
-              key={i.primary.anchor + index}
-              name={i.primary.anchor}
-              href={"#" + i.primary.anchor.toString().toLowerCase()}
-            />
-          )
+            i.slice_type &&
+            (
+              <Mnav
+                clickLink={null}
+                key={i.primary.anchor + index}
+                name={i.primary.anchor}
+                href={"#" + i.primary.anchor.toString().toLowerCase()}
+              />
+            )
           )}
         </MobileNav>
         <NavbarToggle toggle={() => toggleOpen()} />

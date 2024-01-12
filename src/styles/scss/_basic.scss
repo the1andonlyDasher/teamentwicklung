@@ -71,8 +71,7 @@ body {
   overflow-x: hidden;
   // scrollbar-width: none !important;
   scroll-behavior: smooth;
-  color: var(--clr-contrast-100);
-  background-image: linear-gradient(45deg, #123269, #ffebb9);
+  color: var(--clr-contrast-800);
 }
 
 body {
@@ -123,8 +122,7 @@ h3,
 h4,
 h5 {
   text-align: left;
-  margin: var(--space-xs) auto;
-  width: 100%;
+  margin: var(--space-xs) 0;
 }
 
 h1,
@@ -172,7 +170,7 @@ h4 {
 
 h5 {
   margin: 0;
-  color: var(--clr-accent2-400);
+  color: var(--clr-accent2-100);
   font-size: var(--fs-text);
   font-weight: 400;
   font-family: $ff-sub;
@@ -236,6 +234,7 @@ a {
   padding: var(--space-m) var(--space-l);
   z-index: 5;
   overflow: hidden;
+  min-height: 40px;
   @include mq(medium) {
     margin-right: auto;
     max-width: 250px;
@@ -254,73 +253,68 @@ a {
   border: none;
   color: var(--clr-contrast-800);
   position: relative;
+
   &::after {
-    background-color: var(--clr-primary-main);
+    background-color: var(--clr-accent2-main);
     z-index: -1;
     transform-origin: center;
-    left: 0;
+    border-radius: 10px;
+    scale: 1;
     opacity: 1;
   }
   &::before {
-    background-color: #000;
     z-index: -1;
     transform-origin: center;
+    scale: 0;
     opacity: 0;
-    right: -100%;
-  }
-  &:hover {
-    color: var(--clr-contrast-100);
+    border-radius: 10px;
   }
   &:hover::after,
   &:active::after {
-    left: -100%;
+    scale: 0;
     opacity: 0;
   }
   &:hover::before,
   &:active::before {
-    right: 0;
+    background-color: var(--clr-secondary-100);
+    scale: 1;
     opacity: 1;
   }
 }
 
 .btn__outline {
-  background-color: #ffffff09;
   color: var(--clr-contrast-800);
   position: relative;
-  border: 2px solid var(--clr-contrast-800);
-  &::before {
-    background-color: rgb(0, 35, 50);
-    mix-blend-mode: difference;
-    z-index: -1;
-    left: -200%;
-    top: -200%;
-
-    border-radius: 9999px;
-    width: 200%;
-    height: 200%;
-  }
+  backdrop-filter: blur(10px);
   &::after {
-    background-color: rgb(255, 221, 169);
-    mix-blend-mode: difference;
-    z-index: -2;
-    right: 200%;
-    bottom: 200%;
-    border-radius: 9999px;
-    width: 200%;
-    height: 200%;
+    background-color: var(--clr-contrast-800);
+    border: 2px solid var(--clr-contrast-800);
+    scale: 0;
+    opacity: 0;
+    border-radius: 10px;
+    color: var(--clr-contrast-100);
+    z-index: -1;
+  }
+  &::before {
+    z-index: -1;
+    border: 2px solid var(--clr-contrast-800);
+    background-color: transparent;
+    border-radius: 10px;
+    scale: 1;
+    opacity: 1;
   }
   &:hover {
-    color: var(--clr-contrast-800);
+    color: var(--clr-contrast-100);
   }
   &:hover::before,
   &:active:before {
-    left: 50%;
-    top: 50%;
+    scale: 0;
+    opacity: 0;
   }
   &:hover::after,
-  &:active::after {
-    right: 50%;
-    bottom: 50%;
+  &:active:after {
+    scale: 1;
+    opacity: 1;
   }
 }
 

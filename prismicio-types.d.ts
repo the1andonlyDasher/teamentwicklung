@@ -4,133 +4,7 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type AgbDocumentDataSlicesSlice = FullpageTextSlice;
-
-/**
- * Content for AGB documents
- */
-interface AgbDocumentData {
-  /**
-   * Slice Zone field in *AGB*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: agb.slices[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-  slices: prismic.SliceZone<AgbDocumentDataSlicesSlice> /**
-   * Meta Description field in *AGB*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A brief summary of the page
-   * - **API ID Path**: agb.meta_description
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */;
-  meta_description: prismic.KeyTextField;
-
-  /**
-   * Meta Image field in *AGB*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: agb.meta_image
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  meta_image: prismic.ImageField<never>;
-
-  /**
-   * Meta Title field in *AGB*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A title of the page used for social media and search engines
-   * - **API ID Path**: agb.meta_title
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  meta_title: prismic.KeyTextField;
-}
-
-/**
- * AGB document from Prismic
- *
- * - **API ID**: `agb`
- * - **Repeatable**: `false`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type AgbDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<Simplify<AgbDocumentData>, "agb", Lang>;
-
-type DatenschutzDocumentDataSlicesSlice = FullpageTextSlice;
-
-/**
- * Content for Datenschutz documents
- */
-interface DatenschutzDocumentData {
-  /**
-   * Slice Zone field in *Datenschutz*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: datenschutz.slices[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-  slices: prismic.SliceZone<DatenschutzDocumentDataSlicesSlice> /**
-   * Meta Description field in *Datenschutz*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A brief summary of the page
-   * - **API ID Path**: datenschutz.meta_description
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */;
-  meta_description: prismic.KeyTextField;
-
-  /**
-   * Meta Image field in *Datenschutz*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: datenschutz.meta_image
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  meta_image: prismic.ImageField<never>;
-
-  /**
-   * Meta Title field in *Datenschutz*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A title of the page used for social media and search engines
-   * - **API ID Path**: datenschutz.meta_title
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  meta_title: prismic.KeyTextField;
-}
-
-/**
- * Datenschutz document from Prismic
- *
- * - **API ID**: `datenschutz`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type DatenschutzDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<DatenschutzDocumentData>,
-    "datenschutz",
-    Lang
-  >;
-
-type FooterDocumentDataSlicesSlice = RichTextSlice | FooterLinkSlice;
+type FooterDocumentDataSlicesSlice = FooterLinkSlice;
 
 /**
  * Content for Footer documents
@@ -172,6 +46,7 @@ export type FooterDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<FooterDocumentData>, "footer", Lang>;
 
 type HomePageDocumentDataSlicesSlice =
+  | ModalSlice
   | ContentSectionSlice
   | LinkSlice
   | KontakformularSlice
@@ -237,71 +112,6 @@ export type HomePageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<
     Simplify<HomePageDocumentData>,
     "home_page",
-    Lang
-  >;
-
-type ImpressumDocumentDataSlicesSlice = FullpageTextSlice;
-
-/**
- * Content for Impressum documents
- */
-interface ImpressumDocumentData {
-  /**
-   * Slice Zone field in *Impressum*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: impressum.slices[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-  slices: prismic.SliceZone<ImpressumDocumentDataSlicesSlice> /**
-   * Meta Description field in *Impressum*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A brief summary of the page
-   * - **API ID Path**: impressum.meta_description
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */;
-  meta_description: prismic.KeyTextField;
-
-  /**
-   * Meta Image field in *Impressum*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: impressum.meta_image
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  meta_image: prismic.ImageField<never>;
-
-  /**
-   * Meta Title field in *Impressum*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A title of the page used for social media and search engines
-   * - **API ID Path**: impressum.meta_title
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  meta_title: prismic.KeyTextField;
-}
-
-/**
- * Impressum document from Prismic
- *
- * - **API ID**: `impressum`
- * - **Repeatable**: `false`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type ImpressumDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<ImpressumDocumentData>,
-    "impressum",
     Lang
   >;
 
@@ -417,11 +227,8 @@ export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
 export type AllDocumentTypes =
-  | AgbDocument
-  | DatenschutzDocument
   | FooterDocument
   | HomePageDocument
-  | ImpressumDocument
   | NavigationsleisteDocument
   | PageDocument;
 
@@ -620,6 +427,16 @@ export interface FullpageTextSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   header: prismic.KeyTextField;
+
+  /**
+   * Ankername field in *FullpageText → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: fullpage_text.primary.anchor
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  anchor: prismic.KeyTextField;
 }
 
 /**
@@ -900,49 +717,56 @@ type LinkSliceVariation = LinkSliceDefault;
 export type LinkSlice = prismic.SharedSlice<"link", LinkSliceVariation>;
 
 /**
- * Primary content in *RichText → Items*
+ * Primary content in *Modal → Primary*
  */
-export interface RichTextSliceDefaultItem {
+export interface ModalSliceDefaultPrimary {
   /**
-   * text field in *RichText → Items*
+   * text field in *Modal → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: rich_text.items[].text
+   * - **API ID Path**: modal.primary.text
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   text: prismic.RichTextField;
+
+  /**
+   * Titel des Modals (Impressum, etc) field in *Modal → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: modal.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
 }
 
 /**
- * Default variation for RichText Slice
+ * Default variation for Modal Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
  * - **Documentation**: https://prismic.io/docs/slice
  */
-export type RichTextSliceDefault = prismic.SharedSliceVariation<
+export type ModalSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Record<string, never>,
-  Simplify<RichTextSliceDefaultItem>
+  Simplify<ModalSliceDefaultPrimary>,
+  never
 >;
 
 /**
- * Slice variation for *RichText*
+ * Slice variation for *Modal*
  */
-type RichTextSliceVariation = RichTextSliceDefault;
+type ModalSliceVariation = ModalSliceDefault;
 
 /**
- * RichText Shared Slice
+ * Modal Shared Slice
  *
- * - **API ID**: `rich_text`
- * - **Description**: RichText
+ * - **API ID**: `modal`
+ * - **Description**: Modal
  * - **Documentation**: https://prismic.io/docs/slice
  */
-export type RichTextSlice = prismic.SharedSlice<
-  "rich_text",
-  RichTextSliceVariation
->;
+export type ModalSlice = prismic.SharedSlice<"modal", ModalSliceVariation>;
 
 declare module "@prismicio/client" {
   interface CreateClient {
@@ -954,21 +778,12 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
-      AgbDocument,
-      AgbDocumentData,
-      AgbDocumentDataSlicesSlice,
-      DatenschutzDocument,
-      DatenschutzDocumentData,
-      DatenschutzDocumentDataSlicesSlice,
       FooterDocument,
       FooterDocumentData,
       FooterDocumentDataSlicesSlice,
       HomePageDocument,
       HomePageDocumentData,
       HomePageDocumentDataSlicesSlice,
-      ImpressumDocument,
-      ImpressumDocumentData,
-      ImpressumDocumentDataSlicesSlice,
       NavigationsleisteDocument,
       NavigationsleisteDocumentData,
       NavigationsleisteDocumentDataSlicesSlice,
@@ -1004,10 +819,10 @@ declare module "@prismicio/client" {
       LinkSliceDefaultItem,
       LinkSliceVariation,
       LinkSliceDefault,
-      RichTextSlice,
-      RichTextSliceDefaultItem,
-      RichTextSliceVariation,
-      RichTextSliceDefault,
+      ModalSlice,
+      ModalSliceDefaultPrimary,
+      ModalSliceVariation,
+      ModalSliceDefault,
     };
   }
 }

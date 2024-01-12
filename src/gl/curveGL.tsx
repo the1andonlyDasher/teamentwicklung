@@ -7,16 +7,19 @@ import {
     MotionPathControls,
     PerspectiveCamera,
     Svg,
+    useAspect,
     useMotion,
 } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { useAnimation, useScroll, useSpring } from "framer-motion";
+import { useFrame, useThree } from "@react-three/fiber";
+import { animate, useAnimation, useScroll, useSpring } from "framer-motion";
 import { motion as motion3d } from "framer-motion-3d"
-import { FunctionComponent, useEffect, useRef, useState } from "react";
-import { CubicBezierCurve3, Vector3 } from "three";
+import { FunctionComponent, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { CubicBezierCurve3, LineDashedMaterial, MeshStandardMaterial, Vector3 } from "three";
 import { Model } from "@/ts/paper_plane"
 import { useAtom } from "jotai";
 import { loc, sections } from "@/ts/atoms";
+import { useRouter } from "next/router";
+import { Flex, Box } from "@react-three/flex"
 interface ServicesGLProps {
     eventSource: any;
 }
@@ -34,22 +37,41 @@ interface MovementProps {
 const ServicesGL: FunctionComponent<ServicesGLProps> = (
     props: ServicesGLProps
 ) => {
-    const numObjects = 20;
-    const [arr] = useState(Array.from({ length: numObjects }));
+    const router = useRouter()
     const poi: any = useRef();
     const line: any = useRef();
-    const curve = new CubicBezierCurve3(
-        controlPoints1[0],
-        controlPoints1[1],
-        controlPoints1[2],
-        controlPoints1[3]
-    );
-    const positions = curve.getPoints(numObjects);
+
+    const [s, setSections]: any = useAtom(sections)
+    const [late, setLate] = useState<any>(0);
+    const [target, setTarget] = useState<any>(0);
+    const [anchors, setAnchors] = useState(s.map((item: any) => item.slice_type ? item.primary.anchor : item.type === "page" ? item.uid : item.type))
+    const [app, setApp] = useAtom(loc)
+    const [targets,]: any = useState({})
 
     useEffect(() => {
-        // console.log(arr);
-        line.current.segments = 111;
-    }, []);
+        anchors.map((anchor: any, index: number) => {
+            targets[`${anchor}`] = 1 / (anchors.length) * (index + 1) - 0.1
+        })
+        console.log(targets)
+    }, [, router.pathname]);
+
+    useEffect(() => {
+        if (app === undefined || null) {
+            setTarget(0);
+        } else {
+            setTarget(targets[`${app}`]);
+        }
+    }, [app]);
+
+    useEffect(() => {
+        animate(late, target, {
+            type: "spring",
+            stiffness: 100,
+            restDelta: 0.001,
+            damping: 50,
+            onUpdate: (latest) => setLate(latest),
+        });
+    }, [target]);
 
     const { scrollYProgress } = useScroll({
         container: props.eventSource,
@@ -61,19 +83,16 @@ const ServicesGL: FunctionComponent<ServicesGLProps> = (
         restDelta: 0.001,
     });
 
+    const { size } = useThree();
+    const [w, h] = useAspect(size.width, size.height);
+    const [disposed, setDisposed] = useState(false);
 
-    const [app, setApp] = useAtom(loc)
-    const [s, setSections]: any = useAtom(sections)
-    const [anchors, setAnchors] = useState(s.map((item: any) => item.primary.anchor))
-    useEffect(() => {
-        console.log(anchors)
-    }, [])
 
 
     const Movement: FunctionComponent<MovementProps> = (props: MovementProps) => {
         const motion = useMotion();
         return useFrame((state) => {
-            motion.current = Y.current;
+            motion.current = late
             poi.current.lookAt(
                 motion.next.x - motion.tangent.x,
                 motion.next.y - motion.tangent.y,
@@ -82,51 +101,36 @@ const ServicesGL: FunctionComponent<ServicesGLProps> = (
         });
     };
 
-
-    const [looks, setLooks]: any = useState([]);
-    useEffect(() => {
-        for (let i = 0; i < positions.length; i++) {
-            const point = positions[i];
-            const norm = i / (positions.length - 1);
-            const tan = curve.getTangent(norm);
-            const l = tan.add(point);
-            // console.log(l);
-            looks.push(l);
-        }
-    }, []);
     const number: any = 100;
-
-    const paperPlaneVariants = {
-        home: { x: 5 },
-        content1: { x: -2 },
-        content2: { x: -1 },
-        kontakt: { x: -5 },
-    }
-
-    const planeControls = useAnimation()
-    useEffect(() => {
-        planeControls.start(`${app}`)
-        console.log(app)
-    }, [app])
 
     return (
         <>
+
             <MotionPathControls object={poi} focusDamping={0.6} damping={0.2}>
                 <Movement eventSource={props.eventSource} />
                 <mesh ref={poi}>
-                    <motion3d.mesh initial="home" variants={paperPlaneVariants} animate={planeControls}>
-                        <Float floatIntensity={0.1}>
-                            <Model position={[2, 0, -5]} rotation={[Math.PI / 50, Math.PI / 2, Math.PI / 5]} />
-                        </Float>
-                    </motion3d.mesh>
+                    <Flex
+                        visible={!disposed}
+                        flexDirection={"row"}
+                        justifyContent="center"
+                        alignItems="center"
+                        position={[-w, h, -3]}
+                        flexWrap="wrap"
+                        size={[w * 2, h, 0]}
+                    ></Flex>
+                    <Float floatIntensity={0.01}>
+                        <Model position={[2, 0, -5]} rotation={[Math.PI / 50, Math.PI / 2, Math.PI / 5]} />
+                    </Float>
+
                     <PerspectiveCamera makeDefault fov={65} />
                 </mesh>
-
                 <CubicBezierLine
+                    needsUpdate
                     gapSize={1}
                     ref={line}
                     lineWidth={3}
                     dashed
+                    visible={app === "undefined" ? false : true}
                     segments={number}
                     isLineSegments2
                     isLine2
@@ -158,7 +162,9 @@ const ServicesGL: FunctionComponent<ServicesGLProps> = (
                     v2={controlPoints1[2]}
                     v3={controlPoints1[3]}
                 />
-            </MotionPathControls>
+
+            </MotionPathControls >
+
         </>
     );
 };

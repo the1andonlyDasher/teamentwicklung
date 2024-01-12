@@ -10,29 +10,35 @@ import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { sections } from "@/ts/atoms";
 
-export async function getStaticProps() {
+export async function getStaticProps({ params }: any) {
   const client = createClient(repositoryName);
   const pageContent = await client.getSingle("home_page");
   const nav = await client.getSingle("navigationsleiste");
   const footer = await client.getByUID("footer", "footer");
+  const pages = await client.getAllByType("page");
 
   return {
     props: {
-      pageContent, nav, footer
+      pageContent, nav, footer, pages
 
     },
   };
 }
 
-export default function Home({ pageContent, nav, footer }: any) {
+export default function Home({ pageContent, nav, footer, pages }: any) {
+  // console.log(pages)
   const links = pageContent.data.slices;
   const sec = links.filter((item: any) => item.slice_type === "content_section")
   const contactForm = links.find((item: any) => item.slice_type === "kontakformular")
-  const arr = sec.concat(contactForm)
+  const hero = links.find((item: any) => item.slice_type === "hero_section")
+  const arrFirst = sec.concat(contactForm)
+  const arr = [hero].concat(arrFirst)
+  arr.push(footer)
+  const arrFinal = arr.concat(pages)
   const [s, setSections]: any = useAtom(sections)
   useEffect(() => {
-    setSections(pageContent.data.slices)
-    console.log(s)
+    // console.log(arrFinal)
+    setSections(arrFinal)
   }, [])
 
   return (<>

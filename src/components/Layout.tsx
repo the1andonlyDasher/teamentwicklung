@@ -67,12 +67,7 @@ export default function Layout({ children, navbar, legals, t }: any) {
       {/* <Navbar navbar={navbar} legals={legals} /> */}
       <AnimatePresence
         mode="wait"
-        initial={true}
-        onExitComplete={() =>
-          setTimeout(() => {
-            handExitComplete();
-          }, 100)
-        }>
+        initial={true}>
 
         <motion.div
           ref={ref}

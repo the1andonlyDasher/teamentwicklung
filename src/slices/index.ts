@@ -9,5 +9,5 @@ export const components = {
   hero_section: dynamic(() => import("./HeroSection")),
   kontakformular: dynamic(() => import("./Kontaktformular")),
   link: dynamic(() => import("./Navigationslinks")),
-  rich_text: dynamic(() => import("./RichText")),
+  modal: dynamic(() => import("./Modal")),
 };

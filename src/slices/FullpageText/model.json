@@ -18,6 +18,13 @@
             "label": "Überschrift",
             "placeholder": ""
           }
+        },
+        "anchor": {
+          "type": "Text",
+          "config": {
+            "label": "Ankername",
+            "placeholder": ""
+          }
         }
       },
       "items": {

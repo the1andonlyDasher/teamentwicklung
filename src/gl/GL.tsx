@@ -13,6 +13,7 @@ import { CubicBezierCurve3 } from "three";
 import ServicesGL from "@/gl/curveGL"
 import { useAtom } from "jotai";
 import { sections } from "@/ts/atoms";
+import { useRouter } from "next/router";
 
 
 declare global {
@@ -33,6 +34,7 @@ interface glProps {
 }
 
 const GL = (props: glProps) => {
+  const router = useRouter()
   const v: V3 = [0, 1, -2];
 
   return (
@@ -50,10 +52,9 @@ const GL = (props: glProps) => {
           stops={[0, 1]}
           rotation={-Math.PI / 3}
         />
-        <ambientLight intensity={1} />
+        <ambientLight intensity={0.5} />
         <directionalLight
-          intensity={1}
-
+          intensity={0.5}
           color={"#fff"}
         />
         <ContactShadows resolution={512} position={[0, -0.8, 0]} opacity={1} scale={10} blur={2} far={0.8} />

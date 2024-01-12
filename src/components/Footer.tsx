@@ -20,17 +20,16 @@ const section_variants = {
 }
 
 const Footer = ({ footer }: any) => {
-  console.log(footer)
   const date = new Date()
   const [app, setApp] = useAtom(loc)
   return (
     <>
       <motion.section
         className="footer"
-        data-section-name={`${footer.data.anchor}`}
-        id={`${footer.data.anchor}`}
+        id={`${footer.type}`}
         variants={section_variants}
         initial="initial"
+        data-section-name={`${footer.type}`}
         whileInView="enter"
         viewport={{ margin: "100px", amount: 0.375, once: false }}
         onViewportEnter={(entry) => {
@@ -45,11 +44,11 @@ const Footer = ({ footer }: any) => {
         }}
         exit="exit"
       >
-        <h5>© {date.getFullYear()} </h5>
         <PrismicRichText field={footer.data.text} />
         <div className="footer-links">
           {footer.data.slices.map((slice: any) => <Link key={slice.primary.link.uid} href={`/${slice.primary.link.uid}`} className="btn__alt" >{slice.primary.link.uid}</Link>)}
         </div>
+        <h5>Teamentwicklung © {date.getFullYear()} </h5>
       </motion.section>
     </>
   );
