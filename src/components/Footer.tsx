@@ -1,10 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
-import { PrismicNextLink } from "@prismicio/next";
-import { PrismicLink, PrismicRichText } from "@prismicio/react";
+import { PrismicRichText } from "@prismicio/react";
 import { loc } from "@/ts/atoms";
 import { useAtom } from "jotai";
 

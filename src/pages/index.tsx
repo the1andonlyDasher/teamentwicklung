@@ -4,9 +4,8 @@ import { components } from "@/slices";
 import Head from "next/head";
 import { SliceZone } from "@prismicio/react";
 import Navbar from "@/components/Navbar/navbar";
-import { Cursor } from "@/components/Cursor";
 import Footer from "@/components/Footer";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { sections } from "@/ts/atoms";
 

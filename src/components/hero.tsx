@@ -1,8 +1,5 @@
-import React, { ReactNode, useEffect, useRef } from "react";
-import { motion, useAnimationControls } from "framer-motion";
-import { useInView } from "framer-motion";
-import Link from "next/link";
-import { Url } from "url";
+import React, { ReactNode } from "react";
+import { motion } from "framer-motion";
 import { PrismicRichText } from "@prismicio/react";
 import { loc } from "@/ts/atoms";
 import { useAtom } from "jotai";

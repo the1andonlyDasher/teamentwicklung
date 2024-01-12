@@ -1,9 +1,5 @@
-"use client"
-
-import { cursor, cursorText } from "@/ts/atoms"
-import { motion, useAnimation, useAnimationControls, useMotionValue, useSpring } from "framer-motion";
-import { useAtom } from "jotai";
-import { useEffect, SVGProps, useState } from "react";
+import { motion, useMotionValue } from "framer-motion";
+import { useEffect } from "react";
 
 export function Cursor({ param }: any) {
     const cursorX = useMotionValue(-100)
