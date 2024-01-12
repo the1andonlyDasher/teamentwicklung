@@ -591,6 +591,7 @@ div[data-scroll-content] .frame:first-child {
 // mouse removed
 
 .cursor {
+  display: none;
   position: fixed;
   left: 0;
   top: 0;
@@ -601,10 +602,15 @@ div[data-scroll-content] .frame:first-child {
   mix-blend-mode: difference;
   background-color: rgb(0, 114, 104);
   pointer-events: none;
+  @include mq(large) {
+    display: block;
+  }
 }
 
 *,
 *::before,
 *::after {
-  cursor: none !important;
+  @include mq(large) {
+    cursor: none !important;
+  }
 }
