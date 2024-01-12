@@ -2,18 +2,13 @@ import {
   ContactShadows,
   Environment,
   GradientTexture,
-  Grid,
-  RoundedBox,
-  SoftShadows
 } from "@react-three/drei";
 import { Canvas, ReactThreeFiber, extend } from "@react-three/fiber";
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef } from "react";
 import { Vector3 as V3 } from "@react-three/fiber";
 import { CubicBezierCurve3 } from "three";
-import ServicesGL from "@/gl/curveGL"
-import { useAtom } from "jotai";
-import { sections } from "@/ts/atoms";
 import { useRouter } from "next/router";
+import ServicesGL from "./curveGL";
 
 
 declare global {

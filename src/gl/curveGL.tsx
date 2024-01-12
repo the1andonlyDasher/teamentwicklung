@@ -1,25 +1,20 @@
 import {
     CubicBezierLine,
     Float,
-    Html,
-    Instance,
-    Instances,
     MotionPathControls,
     PerspectiveCamera,
-    Svg,
     useAspect,
     useMotion,
 } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import { animate, useAnimation, useScroll, useSpring } from "framer-motion";
-import { motion as motion3d } from "framer-motion-3d"
-import { FunctionComponent, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { CubicBezierCurve3, LineDashedMaterial, MeshStandardMaterial, Vector3 } from "three";
+import { animate, useScroll, useSpring } from "framer-motion";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
+import { Vector3 } from "three";
 import { Model } from "@/ts/paper_plane"
 import { useAtom } from "jotai";
 import { loc, sections } from "@/ts/atoms";
 import { useRouter } from "next/router";
-import { Flex, Box } from "@react-three/flex"
+import { Flex } from "@react-three/flex"
 interface ServicesGLProps {
     eventSource: any;
 }

@@ -1,7 +1,7 @@
-import Navbar from "./Navbar/navbar"
+
 import { useRouter } from "next/router";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { load, scrollEnabled } from "@/ts/atoms";
 import { useAtom } from "jotai";
 import WebGL from "@/gl/GL";
