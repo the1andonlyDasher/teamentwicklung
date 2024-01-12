@@ -56,7 +56,6 @@ const Navbar = ({ navbar, links, home }: any) => {
   const hrefs = ["/", "/portfolio", "/moreinfo", "/contact"];
   const legal_hrefs = ["/datapolicy", "/imprint"];
 
-  console.log(navbar.data.logo)
   return (
     <motion.nav
       // className={isShrunk ? "navbar shrunk" : "navbar"}
@@ -78,7 +77,6 @@ const Navbar = ({ navbar, links, home }: any) => {
         >
           <Link aria-label="Home Button" href="/">
             <PrismicImage
-              alt={navbar.data.logo.alt}
               field={navbar.data.logo}
               width={navbar.data.logo.dimensions.width}
               height={navbar.data.logo.dimensions.height}
