@@ -172,8 +172,9 @@ a {
   gap: 0.5em;
   position: fixed;
   margin: 0;
-  padding: 0;
+  padding: 100px 0 0 0;
   flex-direction: column;
+  justify-content: space-evenly;
   list-style-type: none;
   z-index: -1;
   background-color: var(--clr-primary-100);
@@ -277,6 +278,10 @@ a {
   @include mq(medium) {
     font-size: clamp(0.7em, 5vw, 0.9em);
   }
+}
+
+.nav-items-mobile li .nav-link {
+  font-size: clamp(1em, 10vw, 1.75em);
 }
 
 .white li a {

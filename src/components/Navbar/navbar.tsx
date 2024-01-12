@@ -105,6 +105,7 @@ const Navbar = ({ navbar, links, home }: any) => {
             i.slice_type &&
             (
               <Mnav
+                toggle={() => toggleOpen()}
                 clickLink={null}
                 key={i.primary.anchor + index}
                 name={i.primary.anchor}
