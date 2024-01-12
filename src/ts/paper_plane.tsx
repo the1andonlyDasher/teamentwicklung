@@ -50,7 +50,6 @@ export function Model(props: JSX.IntrinsicElements['group']) {
 
   useEffect(() => {
     planeControls.start(`${app}`)
-    console.log(app)
   }, [app])
 
   const { nodes, materials } = useGLTF('/paper_plane.glb') as GLTFResult
