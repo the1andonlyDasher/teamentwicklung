@@ -47,7 +47,7 @@ const ServicesGL: FunctionComponent<ServicesGLProps> = (
         anchors.map((anchor: any, index: number) => {
             targets[`${anchor}`] = 1 / (anchors.length) * (index + 1) - 0.1
         })
-        console.log(targets)
+        // console.log(targets)
     }, [, router.pathname]);
 
     useEffect(() => {
